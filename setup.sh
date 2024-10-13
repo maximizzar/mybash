@@ -140,13 +140,13 @@ main() {
         if [ -f "$HOME/.bashrc" ]; then
                 echo "Skipping .bashrc. It already exists"
         else
-                ln -s .bash/rc "$HOME/.bashrc";
+                ln -s "$(pwd)".bash/rc "$HOME"/.bashrc;
         fi
 
         if [ -f "$HOME/.bash_aliases" ]; then
                 echo "Skipping .bash_aliases. It already exists"
         else
-                ln -s .bash/aliases "$HOME"/.bash_aliases;
+                ln -s "$(pwd)"/.bash/aliases "$HOME"/.bash_aliases;
         fi
 
         PS3='Choose system type:'
