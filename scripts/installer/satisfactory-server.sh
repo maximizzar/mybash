@@ -2,7 +2,7 @@
 
 alias sudo="sudo"
 
-read -p "Enter satisfactory game name. Leave empty to use hostname (uname -n): " SERVICE_NAME
+read -r -p "Enter satisfactory game name. Leave empty to use hostname (uname -n): " SERVICE_NAME
 
 if [ "$SERVICE_NAME" == "" ]; then
 		SERVICE_NAME="$(uname -n)"
@@ -24,14 +24,20 @@ sudo chmod g+s "$GAME_DIR"
 # Create Systemd service
 sudo tee "$SERVICE_PATH" <<EOF
 [Unit]
-Description=Satisfactory game-server (${SERVICE_NAME})
+Description=Satisfactory dedicated server (${SERVICE_NAME})
+Wants=network-online.target
+After=syslog.target network.target nss-lookup.target network-online.target
 
 [Service]
-ExecStart=
+Environment="LD_LIBRARY_PATH=./linux64"
+ExecStartPre=/usr/games/steamcmd +force_install_dir ${GAME_DIR} +login anonymous +app_update 1690800 validate +quit
+ExecStart=${GAME_DIR}/FactoryServer.sh -ServerQueryPort=15777 -BeaconPort=15000 -Port=7777 -log -unattended -multihome=0.0.0.0
 User=satisfactory
-Type=simple
+Group=satisfactory
+StandardOutput=append:/var/log/satisfactory/${SERVICE_NAME}.log
+StandardError=append:/var/log/satisfactory/${SERVICE_NAME}.err
 Restart=on-failure
-RestartSec=10
+WorkingDirectory=${INSTALL_DIR}
 
 [Install]
 WantedBy=multi-user.target
@@ -52,4 +58,17 @@ sudo apt install -y software-properties-common libsdl2-2.0-0:i386 git
 sudo apt update
 sudo apt install -y steamcmd
 
-#sudo -u satisfactory -s steamcmd +force_install_dir "$GAME_DIR" +login anonymous +app_update 1690800 -beta public validate +quit
+# Install and configure system to handle logfiles
+sudo apt install -y logrotated
+sudo mkdir -pv /var/log/satisfactory
+
+sudo tee "/etc/logrotate.d/$SERVICE_NAME" << EOF
+/var/log/satisfactory/${SERVICE_NAME}.* {
+
+}
+EOF
+
+# Start Service and let it handle the server installation
+sudo systemctl start "$SERVICE_NAME.service"
+
+//TODO: finish logrotated setup
