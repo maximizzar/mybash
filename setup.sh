@@ -101,7 +101,7 @@ install_downloader() {
         pipx install gallery-dl
 }
 install_nala() {
-        if ! [ "$(command -v eza)" ]; then
+        if ! [ "$(command -v nala)" ]; then
                 curl https://gitlab.com/volian/volian-archive/-/raw/main/install-nala.sh | bash;
         else
                 echo "nala: already Installed!";
