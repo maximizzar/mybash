@@ -57,5 +57,5 @@ if [ "$#" -eq 4 ]; then
 fi
 
 # If only an start chapter is provided
-ffmpeg -i "$1" -map 0 -ss "$start_time" -c copy "$4"
+ffmpeg -i "$1" -map 0 -ss "$start_time" -c copy "$3"
 exit 0
