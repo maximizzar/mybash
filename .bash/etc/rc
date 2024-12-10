@@ -4,7 +4,6 @@ shopt -s nocaseglob     # This option makes filename globbing case-insensitive.
 shopt -s globstar       # Enables recursive globbing with **. This allows you to use ** to match directories and subdirectories.
 shopt -s checkwinsize   # Ensures that the terminal's COLUMNS and LINES variables are checked and updated after every command.
 shopt -s extglob        # Enables extended pattern matching features, which are more advanced than regular globbing. It allows for additional operators like +(pattern), *(pattern), and ?(pattern).
-shopt -s failglob       # Causes the shell to throw an error if a glob pattern doesn't match any files.
 shopt -s expand_aliases # Allows the use of aliases within scripts. By default, aliases only work in interactive shells.
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
