@@ -8,8 +8,6 @@ else
     sudo apt install -y ca-certificates curl gnupg gpg
 fi
 
-
-
 # Remove current container engine installations
 for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do
     sudo apt-get remove $pkg;
