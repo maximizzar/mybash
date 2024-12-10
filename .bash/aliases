@@ -1,4 +1,5 @@
-alias ll='ls -la'
+# ls
+alias ls='ls -a --color=auto'
 
 # cd command behavior
 alias ..='cd ..'
@@ -49,7 +50,7 @@ alias pst='ps axjf'
 ###
 
 # fastfetch
-if command -v fastfetch &> &dev/null; then
+if command -v fastfetch &> /dev/null; then
         alias fastfetch='fastfetch'
 fi
 
@@ -83,9 +84,12 @@ if command -v bat &> /dev/null; then
         alias bat='bat --theme gruvbox-dark'
 fi
 
-# eza
+# eza and ll
 if command -v eza &> /dev/null; then
-        alias eza='eza --long --grid --across --dereference --all --smart-group --numeric --time-style '+%Y-%m-%d' --no-permissions --octal-permissions'
+        alias eza='eza --long --grid --across --dereference --all --smart-group --numeric --time-style '+%Y-%m-%d' --no-permissions --octal-permissions --git'
+        alias ll='eza --long --grid --across --dereference --all --smart-group --numeric --time-style '+%Y-%m-%d' --no-permissions --octal-permissions --git'
+else
+        alias ll='ls -la --color=auto'
 fi
 
 # oxipng
