@@ -50,9 +50,17 @@ case "$TERM" in
         *);;
 esac
 
-if [ -d "$HOME/.cargo" ]; then
-        export PATH="$PATH:/sbin:/usr/sbin:usr/local/sbin"
-        . "$HOME/.cargo/env"
+if command -v cargo &> /dev/null; then
+    export PATH="/usr/local/cargo/bin:$PATH"
+
+    if [[ "$UID" -eq 0 ]]; then
+        export CARGO_HOME=/usr/local/cargo
+    fi
+
+    if [ -d "$HOME/.cargo" ]; then
+            export PATH="$PATH:/sbin:/usr/sbin:usr/local/sbin"
+            . "$HOME/.cargo/env"
+    fi
 fi
 
 # set PATH so it includes GOPATH/bin if it exists
