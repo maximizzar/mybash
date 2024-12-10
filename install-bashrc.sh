@@ -14,6 +14,12 @@ if [[ "$install_global_bashrc" == yes ]]; then
         fi
 fi
 
+if [[ -f "$HOME/.bash_profile" ]]; then
+        echo "Skipping .bash_profile. It already exists"
+else
+        ln -s "$(pwd)/.bash/profile" "$HOME"/.bash_profile;
+fi
+
 if [ -f "$HOME/.bashrc" ]; then
         echo "Skipping .bashrc. It already exists"
 else
