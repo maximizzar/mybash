@@ -55,15 +55,13 @@ if [[ -d "/usr/local/cargo/bin" ]]; then
     export PATH="/usr/local/cargo/bin:$PATH"
 fi
 
-if command -v cargo &> /dev/null; then
-    if [[ "$UID" -eq 0 ]]; then
-        # For root, set global cargo home
-        export CARGO_HOME="/usr/local/cargo"
-    else
-        # For non-root users, check for local cargo setup
-        if [ -d "$HOME/.cargo" ]; then
-            . "$HOME/.cargo/env"
-        fi
+if [[ "$UID" -eq 0 ]]; then
+    # For root, set global cargo home
+    export CARGO_HOME="/usr/local/cargo"
+else
+    # For non-root users, check for local cargo setup
+    if [ -d "$HOME/.cargo" ]; then
+        . "$HOME/.cargo/env"
     fi
 fi
 
