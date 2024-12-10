@@ -1,18 +1,4 @@
-# list short
-alias ls='eza --long --grid --across --dereference --all --smart-group --numeric --time-style '+%Y-%m-%d'       --no-permissions --octal-permissions'
-# list alt
-alias la='eza --long --grid --across --dereference --all --smart-group --mounts --numeric --time-style long-iso'
-# list long
-alias ll='eza --long        --across --dereference --all --smart-group --mounts           --time-style long-iso --no-permissions --octal-permissions --git --git-repos --extended --context'
-
-# list tree
-lt() {
-        if [ -z "$1" ]; then
-                eza --tree --all
-        else
-                eza --tree --all --level "$1"
-        fi
-}
+alias ll='ls -la'
 
 # cd command behavior
 alias ..='cd ..'
@@ -54,24 +40,43 @@ alias chown='chown --preserve-root'
 alias chmod='chmod --preserve-root'
 alias chgrp='chgrp --preserve-root'
 
-# neofetch defaults
-alias neofetch='neofetch --title_fqdn on --speed_shorthand on --cpu_temp C --memory_percent on --config none --no_config'
-
-# fzf defaults
-alias fzf='fzf --color 16'
-
-# gallery-dl defaults
-alias gallery-dl='gallery-dl --mtime date'
-
-# radeontop defaults
-alias radeontop='radeontop --color --ticks 180 --transparency'
-
-# shellcheck with color
-alias shellcheck='shellcheck --color=always'
-
-# ps aliases
+# ps
 alias ps='ps -lt'
 alias pst='ps axjf'
+
+###
+### non default apt or manual
+###
+
+# fastfetch
+if command -v fastfetch &> &dev/null; then
+        alias fastfetch='fastfetch'
+fi
+
+# fzf
+if command -v fzf &> /dev/null; then
+        alias fzf='fzf --color 16'
+fi
+
+# neofetch
+if command -v neofetch &> /dev/null; then
+        echo "You should uninstall neofetch!"
+        alias neofetch='neofetch --title_fqdn on --speed_shorthand on --cpu_temp C --memory_percent on --config none --no_config'
+fi
+
+# radeontop
+if command .v radeontop &> /dev/null; then
+        alias radeontop='radeontop --color --ticks 180 --transparency'
+fi
+
+# shellcheck
+if command .v radeontop &> /dev/null; then
+        alias shellcheck='shellcheck --color=always'
+fi
+
+###
+### cargo
+###
 
 # bat
 if command -v bat &> /dev/null; then
@@ -83,30 +88,26 @@ if command -v eza &> /dev/null; then
         alias eza='eza --long --grid --across --dereference --all --smart-group --numeric --time-style '+%Y-%m-%d' --no-permissions --octal-permissions'
 fi
 
-if command -v fastfetch &> &dev/null; then
-        alias fastfetch='fastfetch'
-fi
-
-# neofetch
-if command -v neofetch &> /dev/null; then
-        echo "You should uninstall neofetch!"
-        sudo apt purge neofetch
-fi
-
 # oxipng
 if command -v oxipng &> /dev/null; then
         alias oxipng='oxipng --opt 4 --preserve --interlace keep'
 fi
 
-# pipx
-if command -v pipx &> /dev/null; then
-        eval "$(register-python-argcomplete pipx)"
+###
+### pipx
+###
+
+# ansible
+if command -v ansible &> /dev/null; then
+        alias ansible='ansible'
+fi
+
+# gallery-dl
+if command -v gallery-dl &> /dev/null; then
+        alias gallery-dl='gallery-dl --mtime date'
 fi
 
 # yt-dlp
 if command -v yt-dlp &> /dev/null; then
-        alias yt-dlp='           yt-dlp --no-restrict-filenames --mtime --quiet --progress --prefer-free-formats --write-subs --audio-quality 0 --embed-metadata'
-        alias yt-dlp-adn='       yt-dlp --no-restrict-filenames --mtime --quiet --progress --prefer-free-formats --write-subs --audio-quality 0 --embed-metadata --config-locations ~/.yt-dlp/animationdigitalnetwork.conf'
-        alias yt-dlp-hypnotube=' yt-dlp --no-restrict-filenames --mtime --quiet --progress --prefer-free-formats --write-subs --audio-quality 0 --embed-metadata --config-locations ~/.yt-dlp/hypnotube.conf'
-        alias yt-dlp-pornhub='   yt-dlp --no-restrict-filenames --mtime --quiet --progress --prefer-free-formats --write-subs --audio-quality 0 --embed-metadata--config-locations ~/.yt-dlp/pornhub.conf'
+        alias yt-dlp='yt-dlp --no-restrict-filenames --mtime --quiet --progress --prefer-free-formats --write-subs --audio-quality 0 --embed-metadata'
 fi
