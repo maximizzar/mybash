@@ -60,12 +60,6 @@ alias neofetch='neofetch --title_fqdn on --speed_shorthand on --cpu_temp C --mem
 # fzf defaults
 alias fzf='fzf --color 16'
 
-# yt-dlp defaults
-alias yt-dlp='           yt-dlp --no-restrict-filenames --mtime --quiet --progress --prefer-free-formats --write-subs --audio-quality 0 --embed-metadata --embed-thumbnail'
-alias yt-dlp-adn='       yt-dlp --no-restrict-filenames --mtime --quiet --progress --prefer-free-formats --write-subs --audio-quality 0 --embed-metadata --embed-thumbnail --config-locations ~/.yt-dlp/animationdigitalnetwork.conf'
-alias yt-dlp-hypnotube=' yt-dlp --no-restrict-filenames --mtime --quiet --progress --prefer-free-formats --write-subs --audio-quality 0 --embed-metadata --embed-thumbnail --config-locations ~/.yt-dlp/hypnotube.conf'
-alias yt-dlp-pornhub='   yt-dlp --no-restrict-filenames --mtime --quiet --progress --prefer-free-formats --write-subs --audio-quality 0 --embed-metadata --embed-thumbnail --config-locations ~/.yt-dlp/pornhub.conf'
-
 # gallery-dl defaults
 alias gallery-dl='gallery-dl --mtime date'
 
@@ -78,3 +72,41 @@ alias shellcheck='shellcheck --color=always'
 # ps aliases
 alias ps='ps -lt'
 alias pst='ps axjf'
+
+# bat
+if command -v bat &> /dev/null; then
+        alias bat='bat --theme gruvbox-dark'
+fi
+
+# eza
+if command -v eza &> /dev/null; then
+        alias eza='eza --long --grid --across --dereference --all --smart-group --numeric --time-style '+%Y-%m-%d' --no-permissions --octal-permissions'
+fi
+
+if command -v fastfetch &> &dev/null; then
+        alias fastfetch='fastfetch'
+fi
+
+# neofetch
+if command -v neofetch &> /dev/null; then
+        echo "You should uninstall neofetch!"
+        sudo apt purge neofetch
+fi
+
+# oxipng
+if command -v oxipng &> /dev/null; then
+        alias oxipng='oxipng --opt 4 --preserve --interlace keep'
+fi
+
+# pipx
+if command -v pipx &> /dev/null; then
+        eval "$(register-python-argcomplete pipx)"
+fi
+
+# yt-dlp
+if command -v yt-dlp &> /dev/null; then
+        alias yt-dlp='           yt-dlp --no-restrict-filenames --mtime --quiet --progress --prefer-free-formats --write-subs --audio-quality 0 --embed-metadata'
+        alias yt-dlp-adn='       yt-dlp --no-restrict-filenames --mtime --quiet --progress --prefer-free-formats --write-subs --audio-quality 0 --embed-metadata --config-locations ~/.yt-dlp/animationdigitalnetwork.conf'
+        alias yt-dlp-hypnotube=' yt-dlp --no-restrict-filenames --mtime --quiet --progress --prefer-free-formats --write-subs --audio-quality 0 --embed-metadata --config-locations ~/.yt-dlp/hypnotube.conf'
+        alias yt-dlp-pornhub='   yt-dlp --no-restrict-filenames --mtime --quiet --progress --prefer-free-formats --write-subs --audio-quality 0 --embed-metadata--config-locations ~/.yt-dlp/pornhub.conf'
+fi
