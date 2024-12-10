@@ -50,16 +50,20 @@ case "$TERM" in
         *);;
 esac
 
-if command -v cargo &> /dev/null; then
+if [[ -d "/usr/local/cargo/bin" ]]; then
+    # Global path for cargo binaries
     export PATH="/usr/local/cargo/bin:$PATH"
+fi
 
+if command -v cargo &> /dev/null; then
     if [[ "$UID" -eq 0 ]]; then
-        export CARGO_HOME=/usr/local/cargo
-    fi
-
-    if [ -d "$HOME/.cargo" ]; then
-            export PATH="$PATH:/sbin:/usr/sbin:usr/local/sbin"
+        # For root, set global cargo home
+        export CARGO_HOME="/usr/local/cargo"
+    else
+        # For non-root users, check for local cargo setup
+        if [ -d "$HOME/.cargo" ]; then
             . "$HOME/.cargo/env"
+        fi
     fi
 fi
 
