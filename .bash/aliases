@@ -66,12 +66,12 @@ if command -v neofetch &> /dev/null; then
 fi
 
 # radeontop
-if command .v radeontop &> /dev/null; then
+if command -v radeontop &> /dev/null; then
         alias radeontop='radeontop --color --ticks 180 --transparency'
 fi
 
 # shellcheck
-if command .v radeontop &> /dev/null; then
+if command -v shellcheck &> /dev/null; then
         alias shellcheck='shellcheck --color=always'
 fi
 
